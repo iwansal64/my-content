@@ -14,8 +14,9 @@ body {
 button {
   background-color: transparent;
   border: 2px solid black;
+  padding: 5px 10px;
   cursor: pointer;
-}
+} 
 
 a {
   text-decoration: none;
@@ -23,4 +24,9 @@ a {
 
 a:hover {
   text-decoration: underline;
+}
+
+input {
+  background-color: transparent;
+  border: 2px solid black;
 }
