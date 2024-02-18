@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 import { LoginBtn } from "./client_side";
 import { connect_to_users_database } from "@/server_functionalities/server_database_connection";
+import styles from "./page.module.css"
 
 export async function server_handle_login({ username_or_email, password }) {
 
@@ -22,7 +23,7 @@ export async function server_handle_login({ username_or_email, password }) {
 
     if (user["password"] == password) {
         const cookie_store = cookies();
-        cookie_store.set("user-login-info", `${username_or_email}:${password}`)
+        cookie_store.set("user-login-info", `${username_or_email}:${password}`, { maxAge: 60 * 60 * 24 });
         return {
             "success": true,
             "message": "successfully login!"
@@ -40,22 +41,21 @@ export async function server_handle_login({ username_or_email, password }) {
 
 export default async function Login() {
 
-
     return (
         <>
-            <h1>Login</h1>
-            <form action="" className="login-form">
-                <div className="fields">
-                    <div className="field">
+            <form action="" className={styles.login_form}>
+                <h1>Login</h1>
+                <div className={styles.fields}>
+                    <div className={styles.field}>
                         <label htmlFor="username_account">Usermame / Account : </label>
                         <input type="text" name="username_account" id="username_account" autoComplete="on" />
                     </div>
-                    <div className="field">
+                    <div className={styles.field}>
                         <label htmlFor="password">Password : </label>
                         <input type="password" name="password" id="password" autoComplete="off" />
                     </div>
                 </div>
-                <div className="action">
+                <div className={styles.action}>
                     <LoginBtn></LoginBtn>
                 </div>
             </form>
