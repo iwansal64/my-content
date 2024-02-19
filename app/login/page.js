@@ -1,7 +1,7 @@
 "use server"
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
-import { LoginBtn } from "./client_side";
+import LoginBtn from "./_components/login_btn";
 import { connect_to_users_database } from "@/server_functionalities/server_database_connection";
 import styles from "./page.module.css"
 
@@ -56,7 +56,7 @@ export default async function Login() {
                     </div>
                 </div>
                 <div className={styles.action}>
-                    <LoginBtn></LoginBtn>
+                    <LoginBtn />
                 </div>
             </form>
         </>
