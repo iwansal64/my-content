@@ -1,11 +1,12 @@
-import { NavBar } from "../client_side"
-import styles from "../page.module.css"
+"use server"
+
+import NavBar from "../global_components/navbar"
 
 export default async function Message() {
 
     return (
         <>
-            <NavBar style={styles.app} active_index={3} />
+            <NavBar active_index={3} />
 
         </>
     )

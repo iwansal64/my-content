@@ -1,13 +1,12 @@
 "use server"
 
-import { NavBar } from "../client_side"
-import styles from "../page.module.css"
+import NavBar from "../global_components/navbar"
 
 export default async function Explore() {
 
     return (
         <>
-            <NavBar style={styles.app} active_index={1} />
+            <NavBar active_index={1} />
 
         </>
     )
