@@ -85,7 +85,7 @@ export default function NavBar({ active_index = 0 }) {
             const offset_top = active_link_element.children[0].parentElement.offsetTop;
             const bg_active_element = document.createElement("div");
 
-            bg_active_element.className = "bg_active;"
+            bg_active_element.className = "bg_active";
             bg_active_element.style.top = offset_top + "px";
 
             link_container_element.appendChild(bg_active_element);
