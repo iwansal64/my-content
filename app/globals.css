@@ -100,9 +100,10 @@ input {
 }
 .navigation_side > .bg_active {
   position: absolute;
+  right: 0;
   background-color: #111;
   z-index: 1;
-  width: 90%;
+  width: 95%;
   height: 40px;
 }
 .navigation_side .not_visible {
