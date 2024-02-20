@@ -35,14 +35,12 @@ export default function NavBar({ active_index = 0 }) {
         from = Number.parseInt(params.get("from"));
     }
 
-    const links = useMemo(() => {
-        return {
-            "Home": "/",
-            "Explore": "/explore",
-            "Message": "/message",
-            "Community": "/community"
-        }
-    }, []);
+    const links = useMemo(() => ({
+        "Home": "/",
+        "Trending": "/trending",
+        "Message": "/message",
+        "Community": "/community"
+    }), []);
 
     useEffect(() => {
         const link_container_element = document.getElementsByClassName("navigation_side")[0];
