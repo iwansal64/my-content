@@ -1,6 +1,6 @@
 "use server"
 
-import { get_user_database } from "./database_communications"
+import { get_user_database } from "../app/client_functionalities/database_communications"
 
 
 export async function get_users({ params = {}, get_all = false }) {
