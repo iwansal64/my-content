@@ -1,7 +1,7 @@
 "use client"
 import styles from "../page.module.css"
 import { useEffect } from "react"
-import { get_users } from "../global_functions/database_user"
+import { get_users } from "../../server_functionalities/database_user"
 
 function Status({ username, profile }) {
 

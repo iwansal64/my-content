@@ -1,15 +1,24 @@
+"use server"
 import { MongoClient } from "mongodb"
 
-const mongodb_uri = "mongodb://localhost:27017/my-content-database";
-export async function connect_to_database() {
-    const client = new MongoClient(mongodb_uri);
+const mongo_db_uri = "mongodb://localhost:27017";
+
+async function connect_to_database() {
+    const client = new MongoClient(mongo_db_uri);
+
     await client.connect();
-    const database = client.db();
 
-    return database;
+    const db = client.db("my-content-database");
+
+    return db;
 }
 
-export async function connect_to_users_database() {
-    const database = await connect_to_database();
-    return database.collection("users");
+export async function get_user_database() {
+    return (await connect_to_database()).collection("users");
 }
+
+export async function get_post_database() {
+    return (await connect_to_database()).collection("posts");
+}
+
+
