@@ -1,7 +1,6 @@
 "use client"
 import styles from "../page.module.css"
-import { useEffect } from "react"
-import { get_users } from "../../server_functionalities/database_user"
+import Link from "next/link"
 
 function Status({ username, profile }) {
 
@@ -12,25 +11,13 @@ function Status({ username, profile }) {
     )
 }
 
-async function update_posts() {
-
-    const post_container = document.querySelector('.' + styles.status_container);
-    const user = await get_users({ params: { "username": "iwan" }, get_all: false });
-
-    console.log(user);
-
-}
-
-export default function PostContainer() {
-
-    useEffect(() => {
-        update_posts();
-    }, []);
-
+export default function Post({ data }) {
     return (
         <>
-            <div className={styles.status_container}></div>
+            <Link href={"post/" + data["_id"]} className={styles.post}>
+                <h1>{data["post_title"]}</h1>
+                <p>{data["post_description"]}</p>
+            </Link>
         </>
     )
-
 }
