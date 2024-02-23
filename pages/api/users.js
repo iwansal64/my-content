@@ -15,7 +15,7 @@ export default async function handler(req, res) {
             res.status(400).json({ success: false, message: "Parameters Required!" });
             return;
         }
-        const { status_code, result } = await get_users(params);
+        const { status_code, result } = await get_users({ params, match_all: true });
         res.status(status_code).json(result)
     }
     else if (req.method == "POST") {

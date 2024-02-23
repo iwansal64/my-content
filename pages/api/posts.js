@@ -13,8 +13,12 @@ export default async function handler(req, res) {
             res.status(400).json({ success: false, message: "Parameters Required!" });
             return;
         }
-        const { status_code, result } = await get_posts({ params });
-        res.status(status_code).json(result)
+        const { status_code, message, success, result } = await get_posts({ params, match_all: true });
+        res.status(status_code).json({
+            success,
+            message,
+            result
+        })
     }
     else if (req.method == "POST") {
         const { new_data } = req.body;
@@ -24,9 +28,13 @@ export default async function handler(req, res) {
             return;
         }
 
-        const { status_code, result } = await insert_posts({ new_data });
+        const { status_code, success, message, result } = await insert_posts({ new_data });
 
-        res.status(status_code).json(result);
+        res.status(status_code).json({
+            success,
+            message,
+            result
+        });
     }
     else if (req.method == "PUT") {
         const { params, new_data } = req.body;
@@ -36,9 +44,13 @@ export default async function handler(req, res) {
             return;
         }
 
-        const { status_code, result } = await update_posts({ params, new_data });
+        const { status_code, success, message, result } = await update_posts({ params, new_data });
 
-        res.status(status_code).json(result);
+        res.status(status_code).json({
+            success,
+            message,
+            result
+        });
     }
     else if (req.method == "DELETE") {
         const { params } = req.body;
@@ -48,8 +60,12 @@ export default async function handler(req, res) {
             return;
         }
 
-        const { status_code, result } = await delete_posts({ params });
+        const { status_code, success, message, result } = await delete_posts({ params });
 
-        res.status(status_code).json(result);
+        res.status(status_code).json({
+            success,
+            message,
+            result
+        });
     }
 }
