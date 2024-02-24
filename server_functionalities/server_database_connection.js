@@ -53,12 +53,20 @@ export async function get_data({ database, params = {}, match_all = false }) {
         result = await database.findOne(params);
     }
 
+    let result_length = result.length;
+
+    if (!match_all) {
+        result_length = result ? 1 : 0;
+    }
+
+    result = JSON.stringify(result);
+
     return {
         "success": true,
         "status_code": 200,
         "message": "Successfully get data!",
         "result": {
-            "total": match_all ? result.length : (result ? 1 : 0),
+            "total": result_length,
             "data": (result || [])
         }
     };
