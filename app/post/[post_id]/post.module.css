@@ -1,0 +1,27 @@
+.post_container {
+  position: absolute;
+  background-color: #444;
+  width: 90vw;
+  min-height: 90vh;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+.post_container > * {
+  width: 80%;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 20px 15px;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+.post_container > .post_card {
+  margin-top: 10px;
+  background-color: #333;
+  text-align: center;
+}
+.post_container > .post_contents {
+  background-color: #222;
+  white-space: pre-wrap;
+}/*# sourceMappingURL=post.module.css.map */
