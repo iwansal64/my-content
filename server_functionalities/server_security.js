@@ -10,13 +10,17 @@ export async function already_login() {
         return false;
     }
 
-    return true;
+    return account_info["value"];
 }
 
 export async function must_login() {
-    if (!await already_login()) {
+    const value = await already_login();
+
+    if (!value) {
         redirect("/login/");
     }
+
+    return value;
 }
 
 export async function verify_request(req, res) {
