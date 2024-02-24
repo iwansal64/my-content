@@ -6,6 +6,10 @@
 }
 
 div.global_wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  
   height: 100vh;
   width: 100vw;
   background-color: #333;
@@ -118,4 +122,75 @@ input {
 .profile_side {
   justify-self: end;
   justify-content: end;
+}
+
+.profile_side > .username {
+  text-align: center;
+}
+
+#message_container {
+  min-width: 200px;
+  width: 30vw;
+  height: fit-content;
+  min-height: 100px;
+  padding: 5px 10px;
+
+  background-color: #111;  
+  border: 2px solid black;
+  border-radius: 15px;
+  
+  position: absolute;
+  bottom: 10px;
+  
+  transform: translateX(-100%);
+  left: -10px;
+
+  transition: 0.5s;
+
+}
+
+#message_container.active {
+  transform: translateX(10px);
+  left: 0px
+}
+
+.close_btn {
+  position: absolute;
+  right: -10px;
+  top: -10px;
+  background-color: #222;
+  border-radius: 10px;
+}
+
+.progress {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+
+  top: 0;
+  left: 0;
+
+  overflow: hidden;
+}
+
+.bar {
+  background-color: #fff;
+  width: 100%;
+  height: 2px;
+
+  position: absolute;
+  bottom: 2px;
+}
+
+.home_btn {
+  width: fit-content;
+  height: fit-content;
+  
+  z-index: 100;
+  background-color: #555;
+
+  position: fixed;
+  left: 10px;
+  top: 10px;
 }
