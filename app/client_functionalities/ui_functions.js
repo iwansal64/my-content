@@ -3,7 +3,6 @@ import anime from "animejs";
 export function show_message({ message, duration = 0 }) {
     const message_container = document.querySelector("#message_container");
     const message_element = document.querySelector("#message_container > h2");
-    const message_bar = document.querySelector("#message_container > div.progress > div.bar");
 
     message_element.textContent = message;
     message_container.classList.add("active");
@@ -20,6 +19,10 @@ export function show_message({ message, duration = 0 }) {
         }).add({
             translateX: "0",
             duration: duration
-        });
+        }).finished.then(() => {
+            setTimeout(() => {
+                message_container.classList.remove("active");
+            }, 500);
+        })
     }
 }

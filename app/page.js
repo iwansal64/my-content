@@ -9,10 +9,12 @@ import { get_users } from "@/server_functionalities/database_user";
 import Post from "./_components/post_container";
 import { ObjectId } from "mongodb";
 import { show_message } from "./client_functionalities/ui_functions";
+import ServerSideMessage from "./global_components/server_side_message";
+import MessageContainer from "./global_components/message_container";
 
 
 export default async function Home() {
-  await must_login();
+  const [username, password] = (await must_login()).split(":", 2);
 
   const { success, message, result } = await get_posts({});
   result["data"] = JSON.parse(result["data"]);
@@ -26,8 +28,6 @@ export default async function Home() {
   if (!success) {
     show_message({ message });
   }
-
-  console.log(result["data"]);
 
   return (
     <>
@@ -47,6 +47,8 @@ export default async function Home() {
         </div>
       </div>
       <ServerSideBtn callback={logout} />
+      <ServerSideMessage message={"Welcome " + username + "!"} duration={2000} />
+      <MessageContainer />
     </>
   );
 }
