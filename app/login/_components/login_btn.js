@@ -1,7 +1,8 @@
 'use client'
 
 import { server_handle_login } from "../page"
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { show_message } from "@/app/client_functionalities/ui_functions";
 
 export default function LoginBtn() {
 
@@ -14,11 +15,12 @@ export default function LoginBtn() {
 
         const { message, success } = await server_handle_login({ username_or_email, password });
 
-        alert(message);
-
+        show_message({ message, duration: 2000 });
         if (success) {
-            setDisable(true);
-            window.location.href = "../";
+            setTimeout(() => {
+                setDisable(true);
+                window.location.href = "../";
+            }, 2000)
         }
 
     }
