@@ -2,6 +2,13 @@
 import styles from "../page.module.css"
 import Link from "next/link"
 
+export function PostPlaceHolder() {
+
+    return (
+        <h1>Loading Contents . . .</h1>
+    );
+}
+
 export default function Post({ data, user }) {
     return (
         <>
