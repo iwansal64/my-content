@@ -4,8 +4,12 @@ import { Collection } from "mongodb";
 
 const mongo_db_uri = "mongodb://localhost:27017";
 
+function connect_to_mongo_client() {
+    return new MongoClient(mongo_db_uri);
+}
+
 async function connect_to_database() {
-    const client = new MongoClient(mongo_db_uri);
+    const client = connect_to_mongo_client();
 
     await client.connect();
 
@@ -53,9 +57,11 @@ export async function get_data({ database, params = {}, match_all = false }) {
         result = await database.findOne(params);
     }
 
-    let result_length = result.length;
-
-    if (!match_all) {
+    let result_length;
+    if (match_all) {
+        result_length = result.length;
+    }
+    else {
         result_length = result ? 1 : 0;
     }
 
@@ -164,7 +170,14 @@ export async function insert_data({ database, new_data }) {
         }
     }
 
-    const result = await database.insertOne(new_data);
+    let result;
+
+    try {
+        result = await database.insertOne(new_data);
+    }
+    catch (error) {
+
+    }
 
     return {
         "success": true,
@@ -174,5 +187,27 @@ export async function insert_data({ database, new_data }) {
             "total": result.insertedId ? 1 : 0,
             "data": result
         }
+    }
+}
+
+export async function make_transactions({ collections = [], params = [], updated_data = [] }) {
+    const client = connect_to_mongo_client();
+
+    try {
+        await client.connect();
+        const session = client.startSession();
+        session.startTransaction();
+
+        try {
+            for (let index = 0; index < collections.length; index++) {
+                await collections[index].updateOne(params[index], updated_data[index], { session });
+            }
+            // Commit the transaction
+            await session.commitTransaction();
+        } finally {
+            session.endSession();
+        }
+    } finally {
+        await client.close();
     }
 }
