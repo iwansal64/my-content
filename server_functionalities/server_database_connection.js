@@ -8,22 +8,27 @@ function connect_to_mongo_client() {
     return new MongoClient(mongo_db_uri);
 }
 
-async function connect_to_database() {
-    const client = connect_to_mongo_client();
-
-    await client.connect();
+async function connect_to_database({ client = undefined }) {
+    if (client == undefined) {
+        client = connect_to_mongo_client();
+        await client.connect();
+    }
 
     const db = client.db("my-content-database");
 
     return db;
 }
 
-export async function get_user_database() {
-    return (await connect_to_database()).collection("users");
+export async function get_collection({ collection_name, client = undefined }) {
+    return (await connect_to_database({ client })).collection(collection_name)
 }
 
-export async function get_post_database() {
-    return (await connect_to_database()).collection("posts");
+export async function get_user_collection() {
+    return (await connect_to_database({})).collection("users");
+}
+
+export async function get_post_collection() {
+    return (await connect_to_database({})).collection("posts");
 }
 
 function check_if_db(database) {
@@ -200,12 +205,16 @@ export async function make_transactions({ collections = [], params = [], updated
 
         try {
             for (let index = 0; index < collections.length; index++) {
-                await collections[index].updateOne(params[index], updated_data[index], { session });
+                await client.db().collection(collections[index]).updateOne(
+                    params[index],
+                    updated_data[index],
+                    { session }
+                );
             }
             // Commit the transaction
             await session.commitTransaction();
         } finally {
-            session.endSession();
+            await session.endSession();
         }
     } finally {
         await client.close();

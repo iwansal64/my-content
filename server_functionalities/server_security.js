@@ -20,7 +20,7 @@ export async function must_login() {
         redirect("/login/");
     }
 
-    return value;
+    return value.split(":", 3);
 }
 
 export async function verify_request(req, res) {
