@@ -5,10 +5,11 @@ import styles from "./post.module.css"
 import HomeBtn from "../../global_components/home";
 import { Suspense } from "react";
 import { PostPlaceHolder } from "@/app/_components/post_container";
+import LikeBtn from "./_components/like_btn";
+import { must_login } from "@/server_functionalities/server_security";
 
-export async function PostData({ params }) {
-    const id = params["post_id"];
-    const result = await get_posts({ params: { "_id": new ObjectId(id) }, match_all: false });
+export async function PostData({ post_id }) {
+    const result = await get_posts({ params: { "_id": new ObjectId(post_id) }, match_all: false });
 
     const post_data = JSON.parse(result["result"]["data"]);
 
@@ -29,12 +30,15 @@ export async function PostData({ params }) {
 }
 
 export default async function Post({ params }) {
+    const [username, password, user_id] = await must_login();
+    const post_id = params["post_id"];
 
     return (
         <>
             <div className={styles.post_container}>
                 <Suspense fallback={<PostPlaceHolder />}>
-                    <PostData params={params} />
+                    <PostData post_id={post_id} />
+                    <LikeBtn post_id={post_id} user_id={user_id} />
                 </Suspense>
             </div>
             <HomeBtn />
