@@ -44,6 +44,7 @@ input {
   width: 200px;
   height: 100vh;
   background-color: #222;
+  overflow: hidden;
 }
 .nav > * {
   width: 100%;

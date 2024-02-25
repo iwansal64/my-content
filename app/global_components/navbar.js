@@ -10,7 +10,7 @@ function Logo() {
     const logo_img_path = "/logo.svg";
 
     return (
-        <Image src={logo_img_path} style={{ backgroundColor: "transparent" }} alt="Logo" width={100} height={100} />
+        <Image src={logo_img_path} style={{ backgroundColor: "transparent" }} alt="Logo" width={100} height={100} quality={25} />
     )
 
 }
@@ -21,13 +21,13 @@ function Profile() {
 
     return (
         <button style={{ borderWidth: "0" }}>
-            <Image src={profile_img_path} style={{ backgroundColor: "transparent" }} alt="Profile Logo" width={100} height={100} />
+            <Image src={profile_img_path} style={{ backgroundColor: "transparent" }} alt="Profile Logo" width={100} height={100} quality={1} />
         </button>
     )
 
 }
 
-export default function NavBar({ active_index = 0 }) {
+export default function NavBar({ active_index = 0, username = "" }) {
     const params = useSearchParams();
     let from = undefined;
 
@@ -48,6 +48,10 @@ export default function NavBar({ active_index = 0 }) {
         const link_elements = document.getElementsByClassName("link");
         const active_link_element = link_elements[active_index];
         const not_active_link_elements = Array.from(link_elements).filter((value) => value != active_link_element);
+
+        Array.from(link_elements).forEach((element) => {
+            Array.from(element.children)[0].classList.add("not_visible");
+        });
 
         if (typeof from != "undefined" && !isNaN(from) && from < Object.keys(links).length) {
             // Adding A Not Active Bg Element For Non Active Link
@@ -88,7 +92,6 @@ export default function NavBar({ active_index = 0 }) {
 
             link_container_element.appendChild(bg_active_element);
 
-            console.log(offset_top);
 
             not_active_link_elements.forEach((not_active_link_element) => {
                 not_active_link_element.children[1].classList.remove("not_visible");
@@ -117,6 +120,7 @@ export default function NavBar({ active_index = 0 }) {
                 <div className={"lower_side"}>
                     <div className={"profile_side"}>
                         <Profile />
+                        <h2 className={"username"}>{username}</h2>
                     </div>
                 </div>
             </nav>
