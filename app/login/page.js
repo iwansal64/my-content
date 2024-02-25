@@ -22,10 +22,11 @@ export async function server_handle_login({ username_or_email, password }) {
 
     const user = user_by_email ? user_by_email : user_by_username
     const id = user["_id"].toString();
+    const username = user["username"];
 
     if (user["password"] == password) {
         const cookie_store = cookies();
-        cookie_store.set("user-login-info", `${username_or_email}:${password}:${id}`, { maxAge: 60 * 60 * 24 });
+        cookie_store.set("user-login-info", `${username}:${password}:${id}`, { maxAge: 60 * 60 * 24 });
         return {
             "success": true,
             "message": "Successfully Login! You'll be redirected in 2 seconds"
