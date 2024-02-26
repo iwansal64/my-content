@@ -15,13 +15,26 @@ export default function LoginBtn() {
 
         const { message, success } = await server_handle_login({ username_or_email, password });
 
-        show_message({ message, duration: 2000 });
+        let on_click_close = () => { };
+
         if (success) {
-            setTimeout(() => {
+            on_click_close = () => {
                 setDisable(true);
                 window.location.href = "../";
-            }, 2000)
+            };
         }
+
+        const after_duration = () => {
+            if (success) {
+                setTimeout(() => {
+                    setDisable(true);
+                    window.location.href = "../";
+                }, 2000)
+            }
+        }
+
+        show_message({ message, duration: 2000, on_click_close, after_duration });
+
 
     }
 
