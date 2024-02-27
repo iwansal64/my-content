@@ -171,6 +171,16 @@ input {
   top: -10px;
   background-color: #222;
   border-radius: 10px;
+  width: max-content;
+  height: max-content;
+  font-size: 1rem;
+
+  z-index: 100;
+  
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
 }
 
 .progress {
