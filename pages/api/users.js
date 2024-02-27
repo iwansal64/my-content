@@ -7,8 +7,6 @@ export default async function handler(req, res) {
         return;
     }
 
-    console.log("TROBOS");
-
     if (req.method == "GET") {
         const params = req.query;
         if (!params) {
@@ -26,7 +24,7 @@ export default async function handler(req, res) {
             return;
         }
 
-        const { status_code, result } = await insert_users(new_data);
+        const { status_code, result } = await insert_users({ new_data });
 
         res.status(status_code).json(result);
     }
@@ -38,7 +36,7 @@ export default async function handler(req, res) {
             return;
         }
 
-        const { status_code, result } = await update_users(params, new_data);
+        const { status_code, result } = await update_users({ params, new_data });
 
         res.status(status_code).json(result);
     }
@@ -50,7 +48,7 @@ export default async function handler(req, res) {
             return;
         }
 
-        const { status_code, result } = await delete_users(params);
+        const { status_code, result } = await delete_users({ params });
 
         res.status(status_code).json(result);
     }

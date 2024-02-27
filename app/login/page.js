@@ -2,13 +2,13 @@
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 import LoginBtn from "./_components/login_btn";
-import { get_user_database } from "@/server_functionalities/server_database_connection";
+import { get_user_collection } from "@/server_functionalities/server_database_connection";
 import styles from "./page.module.css"
 import MessageContainer from "../global_components/message_container";
 
 export async function server_handle_login({ username_or_email, password }) {
 
-    const user_database = await get_user_database();
+    const user_database = await get_user_collection();
 
     console.log(username_or_email);
     const user_by_username = await user_database.findOne({ username: username_or_email });
