@@ -7,6 +7,8 @@ import { Suspense } from "react";
 import { PostPlaceHolder } from "@/app/_components/post_container";
 import LikeBtn from "./_components/like_btn";
 import { must_login } from "@/server_functionalities/server_security";
+import ServerSideButton from "@/app/global_components/server_side_btn";
+import { likePost } from "@/app/client_functionalities/user_manager_functions";
 
 export async function PostData({ post_id }) {
     const result = await get_posts({ params: { "_id": new ObjectId(post_id) }, match_all: false });
@@ -30,15 +32,15 @@ export async function PostData({ post_id }) {
 }
 
 export default async function Post({ params }) {
-    const [username, password, user_id] = await must_login();
-    const post_id = params["post_id"];
+    let [username, password, user_id] = await must_login();
+    let post_id = params["post_id"];
 
     return (
         <>
             <div className={styles.post_container}>
                 <Suspense fallback={<PostPlaceHolder />}>
                     <PostData post_id={post_id} />
-                    <LikeBtn post_id={post_id} user_id={user_id} />
+                    <ServerSideButton callback={likePost} params={{ user_id, post_id }} />
                 </Suspense>
             </div>
             <HomeBtn />

@@ -1,8 +1,8 @@
 "use client"
-export default function ServerSideButton({ callback = async () => { }, text = "" }) {
+export default function ServerSideButton({ callback = async () => { }, text = "", params = {} }) {
 
     const handle_click = async () => {
-        await callback();
+        await callback(params);
     }
 
     return (
