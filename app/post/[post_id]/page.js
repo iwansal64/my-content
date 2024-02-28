@@ -1,11 +1,9 @@
 import { get_posts } from "@/server_functionalities/database_post"
-import { redirect } from "next/navigation"
 import { ObjectId } from "mongodb";
 import styles from "./post.module.css"
 import HomeBtn from "../../global_components/home";
 import { Suspense } from "react";
 import { PostPlaceHolder } from "@/app/_components/post_container";
-import LikeBtn from "./_components/like_btn";
 import { must_login } from "@/server_functionalities/server_security";
 import ServerSideButton from "@/app/global_components/server_side_btn";
 import { likePost } from "@/app/client_functionalities/user_manager_functions";
