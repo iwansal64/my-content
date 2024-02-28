@@ -1,0 +1,18 @@
+.profile_container {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+}
+.profile_container > * {
+  width: 100%;
+}
+.profile_container .profile_icon {
+  text-align: center;
+}
+.profile_container .username_email {
+  width: -moz-max-content;
+  width: max-content;
+}/*# sourceMappingURL=profile.module.css.map */
