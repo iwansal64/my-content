@@ -60,7 +60,6 @@ export default async function Home() {
       </div>
       <ServerSideMessage message={"Welcome " + username + "!"} duration={2000} />
       <MessageContainer />
-      <ServerSideBtn callback={logout} text="Logout" />
     </>
   );
 }
