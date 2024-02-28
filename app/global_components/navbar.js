@@ -1,31 +1,11 @@
 "use client"
 import Image from "next/image";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import anime from "animejs";
 import { useEffect, useMemo } from "react";
-
-function Logo() {
-
-    const logo_img_path = "/logo.svg";
-
-    return (
-        <Image src={logo_img_path} style={{ backgroundColor: "transparent" }} alt="Logo" width={100} height={100} quality={25} />
-    )
-
-}
-
-function Profile() {
-
-    const profile_img_path = "/icon-profile.svg";
-
-    return (
-        <button style={{ borderWidth: "0" }}>
-            <Image src={profile_img_path} style={{ backgroundColor: "transparent" }} alt="Profile Logo" width={100} height={100} quality={1} />
-        </button>
-    )
-
-}
+import Logo from "./logo";
+import Profile from "./profile";
 
 export default function NavBar({ active_index = 0, username = "" }) {
     const params = useSearchParams();
