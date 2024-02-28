@@ -27,4 +27,10 @@
   white-space: pre-wrap;
   overflow-y: auto;
   overflow-x: hidden;
+}
+.post_container .liked {
+  background-color: green;
+}
+.post_container .not_liked {
+  background-color: red;
 }/*# sourceMappingURL=post.module.css.map */
