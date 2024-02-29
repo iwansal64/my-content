@@ -5,6 +5,8 @@ import { must_login } from "@/server_functionalities/server_security";
 import { get_users } from "@/server_functionalities/database_user";
 import { ObjectId } from "mongodb";
 import HomeBtn from "../global_components/home";
+import ServerSideButton from "../global_components/server_side_btn";
+import { logout } from "../client_functionalities/user_manager_functions";
 
 export default async function ProfilePage() {
     const [username, password, id] = await must_login();
@@ -32,6 +34,7 @@ export default async function ProfilePage() {
                 </div>
             </div>
             <HomeBtn />
+            <ServerSideButton callback={logout} class_name={styles.logout_btn} text="Logout" />
         </>
     )
 }

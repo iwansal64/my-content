@@ -15,4 +15,15 @@
 .profile_container .username_email {
   width: -moz-max-content;
   width: max-content;
+}
+
+.logout_btn {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 10px;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }/*# sourceMappingURL=profile.module.css.map */
