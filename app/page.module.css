@@ -6,16 +6,29 @@
 .post_container {
   background-color: #444;
   width: 100%;
-  height: -moz-fit-content;
-  height: fit-content;
+  height: 100%;
   padding: 10px 0;
   position: relative;
   top: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: 10px;
-  box-sizing: border-box;
+}
+@media (min-width: 700px) {
+  .post_container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 20%));
+    grid-template-rows: repeat(3, 300px);
+    grid-auto-flow: row;
+    place-content: center;
+    gap: 10px;
+  }
+}
+@media (max-width: 700px) {
+  .post_container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+  }
 }
 .post_container .post {
   background-color: #555;
