@@ -15,7 +15,7 @@ import { PostFallback } from "./global_components/fallback_components";
 import { logout } from "./client_functionalities/user_manager_functions";
 
 async function PostContainer() {
-  const { success, message, result } = await get_posts({});
+  const { success, message, result } = await get_posts({ stringify: true });
   if (!success) {
     show_message({ message });
   }
@@ -24,7 +24,7 @@ async function PostContainer() {
 
   for (let index = 0; index < result["total"]; index++) {
     const data = result["data"][index];
-    const creator = JSON.parse((await get_users({ params: { "_id": (new ObjectId(data["creator_id"])) }, match_all: false }))["result"]["data"]);
+    const creator = JSON.parse((await get_users({ params: { "_id": (new ObjectId(data["creator_id"])) }, match_all: false, stringify: true }))["result"]["data"]);
     result["data"][index] = [data, creator];
   };
 

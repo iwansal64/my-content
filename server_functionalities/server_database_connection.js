@@ -37,17 +37,14 @@ function check_if_db(database) {
             "success": false,
             "status_code": 400,
             "message": "Database Required",
-            "result": {
-                "total": 0,
-                "data": []
-            }
+            "result": {}
         };
     }
 
     return false;
 }
 
-export async function get_data({ database, params = {}, match_all = false }) {
+export async function get_data({ database, params = {}, match_all = false, stringify = false }) {
     const is_not_db = check_if_db(database);
     if (is_not_db) {
         return is_not_db;
@@ -70,7 +67,9 @@ export async function get_data({ database, params = {}, match_all = false }) {
         result_length = result ? 1 : 0;
     }
 
-    result = JSON.stringify(result);
+    if (stringify) {
+        result = JSON.stringify(result);
+    }
 
     return {
         "success": true,
@@ -83,7 +82,7 @@ export async function get_data({ database, params = {}, match_all = false }) {
     };
 }
 
-export async function update_data({ database, params = {}, new_data = {}, match_all = false }) {
+export async function update_data({ database, params = {}, new_data = {}, match_all = false, stringify = false }) {
     const is_not_db = check_if_db(database);
     if (is_not_db) {
         return is_not_db;
@@ -94,9 +93,7 @@ export async function update_data({ database, params = {}, new_data = {}, match_
             "success": false,
             "status_code": 400,
             "message": "Params and New Data required!",
-            "result": {
-                "data": []
-            }
+            "result": {}
         };
     }
 
@@ -107,6 +104,10 @@ export async function update_data({ database, params = {}, new_data = {}, match_
     }
     else {
         result = await database.updateOne(params, new_data);
+    }
+
+    if (stringify) {
+        result = JSON.stringify(result);
     }
 
     return {
@@ -120,7 +121,7 @@ export async function update_data({ database, params = {}, new_data = {}, match_
     }
 }
 
-export async function delete_data({ database, params = {}, match_all = false }) {
+export async function delete_data({ database, params = {}, match_all = false, stringify = false }) {
     const is_not_db = check_if_db(database);
     if (is_not_db) {
         return is_not_db;
@@ -131,9 +132,7 @@ export async function delete_data({ database, params = {}, match_all = false }) 
             "success": false,
             "status_code": 400,
             "message": "",
-            "result": {
-                "data": []
-            }
+            "result": {}
         };
     }
 
@@ -144,6 +143,10 @@ export async function delete_data({ database, params = {}, match_all = false }) 
     }
     else {
         result = await database.deleteOne(params);
+    }
+
+    if (stringify) {
+        result = JSON.stringify(result);
     }
 
     return {
@@ -157,7 +160,7 @@ export async function delete_data({ database, params = {}, match_all = false }) 
     }
 }
 
-export async function insert_data({ database, new_data }) {
+export async function insert_data({ database, new_data, stringify = false }) {
     const is_not_db = check_if_db(database);
     if (is_not_db) {
         return is_not_db;

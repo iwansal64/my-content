@@ -3,22 +3,22 @@
 import { delete_data, get_data, get_user_collection, insert_data, update_data } from "./server_database_connection";
 
 
-export async function get_users({ params = {}, match_all = false }) {
+export async function get_users({ params = {}, match_all = false, stringify = false }) {
     const user_database = await get_user_collection();
-    return get_data({ database: user_database, params, match_all });
+    return get_data({ database: user_database, params, match_all, stringify });
 }
 
-export async function update_users({ params, new_data, match_all = false }) {
+export async function update_users({ params, new_data, match_all = false, stringify = false }) {
     const user_database = await get_user_collection();
-    return update_data({ database: user_database, params, new_data, match_all });
+    return update_data({ database: user_database, params, new_data, match_all, stringify });
 }
 
-export async function delete_users({ params, match_all }) {
+export async function delete_users({ params, match_all, stringify = false }) {
     const user_database = await get_user_collection();
-    return delete_data({ database: user_database, params, match_all });
+    return delete_data({ database: user_database, params, match_all, stringify });
 }
 
-export async function insert_users({ new_data }) {
+export async function insert_users({ new_data, stringify = false }) {
     const user_database = await get_user_collection();
 
     new_data["posts_count"] = {
@@ -56,6 +56,6 @@ export async function insert_users({ new_data }) {
         new_data["description"] = "";
     }
 
-    return insert_data({ database: user_database, new_data });
+    return insert_data({ database: user_database, new_data, stringify });
 }
 
