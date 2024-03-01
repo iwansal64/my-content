@@ -18,6 +18,8 @@ export default async function ProfilePage() {
         user_data = JSON.parse(result["result"]["data"]);
     }
 
+    console.log(user_data);
+
     return (
         <>
             <div className={styles.profile_container}>
@@ -25,8 +27,8 @@ export default async function ProfilePage() {
                 <h1 className={styles.username_email}>{user_data["username"]} | {user_data["email"]}</h1>
                 <div className={styles.post_count}>
                     <h2>-- Post Counts --</h2>
-                    <h2>Photo : {user_data["post_counts"]["photo"]}</h2>
-                    <h2>Video : {user_data["post_counts"]["video"]}</h2>
+                    <h2>Photo : {user_data["posts_count"]["photo"]}</h2>
+                    <h2>Video : {user_data["posts_count"]["video"]}</h2>
                 </div>
                 <div className={styles.like_stats}>
                     <h2>-- Likes Count --</h2>
