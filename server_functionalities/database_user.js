@@ -5,17 +5,25 @@ import { delete_data, get_data, get_user_collection, insert_data, update_data } 
 
 export async function get_users({ params = {}, match_all = false, stringify = false }) {
     const user_database = await get_user_collection();
-    return get_data({ database: user_database, params, match_all, stringify });
+    const return_value = await get_data({ database: user_database, params, match_all, stringify });
+
+    console.log(return_value);
+    console.log(typeof return_value);
+    return return_value;
 }
 
 export async function update_users({ params, new_data, match_all = false, stringify = false }) {
     const user_database = await get_user_collection();
-    return update_data({ database: user_database, params, new_data, match_all, stringify });
+    const return_value = await update_data({ database: user_database, params, new_data, match_all, stringify });
+
+    return return_value;
 }
 
 export async function delete_users({ params, match_all, stringify = false }) {
     const user_database = await get_user_collection();
-    return delete_data({ database: user_database, params, match_all, stringify });
+    const return_value = await delete_data({ database: user_database, params, match_all, stringify });
+
+    return return_value;
 }
 
 export async function insert_users({ new_data, stringify = false }) {
@@ -56,6 +64,8 @@ export async function insert_users({ new_data, stringify = false }) {
         new_data["description"] = "";
     }
 
-    return insert_data({ database: user_database, new_data, stringify });
+    const return_value = await insert_data({ database: user_database, new_data, stringify });
+
+    return return_value;
 }
 

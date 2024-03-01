@@ -67,11 +67,7 @@ export async function get_data({ database, params = {}, match_all = false, strin
         result_length = result ? 1 : 0;
     }
 
-    if (stringify) {
-        result = JSON.stringify(result);
-    }
-
-    return {
+    let return_value = {
         "success": true,
         "status_code": 200,
         "message": "Successfully get data!",
@@ -80,6 +76,12 @@ export async function get_data({ database, params = {}, match_all = false, strin
             "data": (result || [])
         }
     };
+
+    if (stringify) {
+        return_value = JSON.stringify(result);
+    }
+
+    return return_value;
 }
 
 export async function update_data({ database, params = {}, new_data = {}, match_all = false, stringify = false }) {
@@ -106,11 +108,7 @@ export async function update_data({ database, params = {}, new_data = {}, match_
         result = await database.updateOne(params, new_data);
     }
 
-    if (stringify) {
-        result = JSON.stringify(result);
-    }
-
-    return {
+    let return_value = {
         "success": true,
         "status_code": 200,
         "message": "Successfully update data!",
@@ -118,7 +116,14 @@ export async function update_data({ database, params = {}, new_data = {}, match_
             "total": result.matchedCount,
             "data": result
         }
+    };
+
+    if (stringify) {
+        return_value = JSON.stringify(return_value);
     }
+
+    return return_value
+
 }
 
 export async function delete_data({ database, params = {}, match_all = false, stringify = false }) {
@@ -145,11 +150,8 @@ export async function delete_data({ database, params = {}, match_all = false, st
         result = await database.deleteOne(params);
     }
 
-    if (stringify) {
-        result = JSON.stringify(result);
-    }
 
-    return {
+    let return_value = {
         "success": true,
         "status_code": 200,
         "message": `Total ${result.deletedCount}`,
@@ -157,7 +159,13 @@ export async function delete_data({ database, params = {}, match_all = false, st
             "total": result.deletedCount,
             "data": result
         }
+    };
+
+    if (stringify) {
+        return_value = JSON.stringify(return_value);
     }
+
+    return return_value;
 }
 
 export async function insert_data({ database, new_data, stringify = false }) {
@@ -184,10 +192,10 @@ export async function insert_data({ database, new_data, stringify = false }) {
         result = await database.insertOne(new_data);
     }
     catch (error) {
-
+        // pass...
     }
 
-    return {
+    let return_value = {
         "success": true,
         "status_code": 200,
         "message": result.insertedId ? "Successfully Insert Data!" : "Unsuccessfully Insert Data!",
@@ -195,7 +203,13 @@ export async function insert_data({ database, new_data, stringify = false }) {
             "total": result.insertedId ? 1 : 0,
             "data": result
         }
+    };
+
+    if (stringify) {
+        return_value = JSON.stringify(return_value);
     }
+
+    return return_value;
 }
 
 export async function make_transactions({ collections = [], params = [], updated_data = [] }) {

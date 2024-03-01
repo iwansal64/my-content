@@ -15,7 +15,7 @@ export default async function ProfilePage() {
 
     let user_data = {};
     if (result["success"] && result["result"]["total"] > 0) {
-        user_data = JSON.parse(result["result"]["data"]);
+        user_data = result["result"]["data"];
     }
 
     console.log(user_data);
