@@ -11,7 +11,7 @@ import { show_message } from "./client_functionalities/ui_functions";
 import ServerSideMessage from "./global_components/server_side_message";
 import MessageContainer from "./global_components/message_container";
 import { Suspense } from "react";
-import { PostPlaceHolder } from "./_components/post_container";
+import { PostFallback } from "./global_components/fallback_components";
 import { logout } from "./client_functionalities/user_manager_functions";
 
 async function PostContainer() {
@@ -53,7 +53,7 @@ export default async function Home() {
       <div className="navbar_container">
         <NavBar username={username} active_index={0} />
       </div>
-      <Suspense fallback={<PostPlaceHolder />}>
+      <Suspense fallback={<PostFallback />}>
         <PostContainer />
       </Suspense>
       <div className={styles.home_container}>
