@@ -18,7 +18,7 @@ export default function NavBar({ active_index = 0, username = "" }) {
     const links = useMemo(() => ({
         "Home": "/",
         "Trending": "/trending",
-        "Message": "/message",
+        "Friends": "/friends",
         "Community": "/community"
     }), []);
 
