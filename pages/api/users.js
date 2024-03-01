@@ -14,7 +14,7 @@ export default async function handler(req, res) {
             return;
         }
         const { status_code, result } = await get_users({ params, match_all: true });
-        res.status(status_code).json(result)
+        res.status(status_code).json(result);
     }
     else if (req.method == "POST") {
         const { new_data } = req.body;
@@ -25,7 +25,6 @@ export default async function handler(req, res) {
         }
 
         const { status_code, result } = await insert_users({ new_data });
-
         res.status(status_code).json(result);
     }
     else if (req.method == "PUT") {

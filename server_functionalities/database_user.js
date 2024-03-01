@@ -32,9 +32,10 @@ export async function insert_users({ new_data }) {
 
     let retval = {};
 
+    const new_data_keys = Object.keys(new_data);
     const required_fields = ["username", "password", "email"];
     required_fields.forEach((value, index) => {
-        if (!Object.keys(new_data).includes(value)) {
+        if (!new_data_keys.includes(value)) {
             retval = {
                 "success": false,
                 "status_code": 400,
@@ -51,7 +52,9 @@ export async function insert_users({ new_data }) {
         return retval;
     }
 
-    console.log(new_data);
+    if (!new_data_keys.includes("description")) {
+        new_data["description"] = "";
+    }
 
     return insert_data({ database: user_database, new_data });
 }
