@@ -30,6 +30,27 @@ export async function insert_users({ new_data }) {
     new_data["likes_count"] = 0;
     new_data["friends"] = [];
 
+    let retval = {};
+
+    const required_fields = ["username", "password", "email"];
+    required_fields.forEach((value, index) => {
+        if (!Object.keys(new_data).includes(value)) {
+            retval = {
+                "success": false,
+                "status_code": 400,
+                "message": "The new field keys is not complete!",
+                "result": {
+                    "total": 0,
+                    "data": []
+                }
+            };
+        }
+    })
+
+    if (Object.keys(retval).length > 0) {
+        return retval;
+    }
+
     console.log(new_data);
 
     return insert_data({ database: user_database, new_data });
