@@ -20,6 +20,18 @@ export async function delete_users({ params, match_all }) {
 
 export async function insert_users({ new_data }) {
     const user_database = await get_user_collection();
+
+    new_data["posts_count"] = {
+        "photo": 0,
+        "video": 0
+    }
+    new_data["first_join"] = new Date();
+    new_data["liked_posts"] = [];
+    new_data["likes_count"] = 0;
+    new_data["friends"] = [];
+
+    console.log(new_data);
+
     return insert_data({ database: user_database, new_data });
 }
 
