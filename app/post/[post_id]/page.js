@@ -9,9 +9,9 @@ import ServerSideButton from "@/app/global_components/server_side_btn";
 import { handle_like_post, like_post, unlike_post } from "@/app/client_functionalities/user_manager_functions";
 
 async function PostData({ post_id }) {
-    const result = await get_posts({ params: { "_id": new ObjectId(post_id) }, match_all: false, stringify: true });
+    const result = await get_posts({ params: { "_id": new ObjectId(post_id) }, match_all: false });
 
-    const post_data = JSON.parse(result["result"]["data"]);
+    const post_data = result["result"]["data"];
 
     return (
         <>

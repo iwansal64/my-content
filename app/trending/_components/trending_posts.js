@@ -29,8 +29,8 @@ async function Post({ data, number }) {
 
 export default async function TrendingPosts() {
 
-    const result = await get_posts({ params: {}, match_all: true, stringify: true });
-    const posts_data = JSON.parse(result["result"]["data"]);
+    const result = await get_posts({ params: {}, match_all: true });
+    const posts_data = result["result"]["data"];
     posts_data.sort((a, b) => b["likes_count"] - a["likes_count"]);
 
     return (
