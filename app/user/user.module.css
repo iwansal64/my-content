@@ -1,6 +1,16 @@
+.main_wrapper {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 .profile_container {
-  position: absolute;
+  position: relative;
   left: 50%;
+  max-width: 50vw;
+  width: -moz-fit-content;
+  width: fit-content;
   transform: translateX(-50%);
   margin-top: 10px;
   display: flex;
@@ -19,9 +29,8 @@
 
 .logout_btn {
   position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 10px;
+  right: 20px;
+  top: 20px;
   padding: 10px 20px;
   display: flex;
   justify-content: center;
@@ -30,4 +39,24 @@
 
 .already_add {
   background-color: #222;
+}
+
+.post_container {
+  margin-top: 10px;
+  border: 2px solid #111;
+  width: 90vw;
+  height: 100%;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.post_container .post {
+  background-color: #555;
+  padding: 10px;
 }/*# sourceMappingURL=user.module.css.map */
