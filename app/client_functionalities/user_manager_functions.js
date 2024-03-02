@@ -1,5 +1,5 @@
 "use server"
-import { update_posts, get_posts } from "@/server_functionalities/database_post";
+import { update_posts, get_posts, insert_posts } from "@/server_functionalities/database_post";
 import { update_users } from "@/server_functionalities/database_user";
 import { ObjectId } from "mongodb";
 import { cookies } from "next/headers"
@@ -89,4 +89,32 @@ export async function handle_like_post({ post_id, user_id }) {
     else {
         like_post({ post_id, user_id });
     }
+}
+
+export async function add_post({ user_id, post_data, stringify = false }) {
+
+    const update_user_result = await update_users({
+        params: {
+            "_id": new ObjectId(user_id)
+        },
+        new_data: {
+            $inc: {
+                "posts_count": 1
+            }
+        }
+    });
+
+    const insert_post_result = await insert_posts({
+        new_data: {
+            "creator_id": new ObjectId(user_id),
+            "post_title": post_data["post_title"],
+            "post_description": post_data["post_description"],
+            "post_contents": post_data["post_contents"],
+            "post_categories": [],
+            "likes_count": 0,
+            "users_like": []
+        }
+    });
+
+    return JSON.stringify({ update_user_result, insert_post_result });
 }
