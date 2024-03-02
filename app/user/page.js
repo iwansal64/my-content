@@ -1,5 +1,5 @@
 'use server'
-import styles from "./profile.module.css";
+import styles from "./user.module.css";
 import Profile from "../global_components/profile";
 import { must_login } from "@/server_functionalities/server_security";
 import { get_users } from "@/server_functionalities/database_user";
@@ -17,8 +17,6 @@ export default async function ProfilePage() {
     if (result["success"] && result["result"]["total"] > 0) {
         user_data = result["result"]["data"];
     }
-
-    console.log(user_data);
 
     return (
         <>

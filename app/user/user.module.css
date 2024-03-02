@@ -26,4 +26,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}/*# sourceMappingURL=profile.module.css.map */
+}
+
+.already_add {
+  background-color: #222;
+}/*# sourceMappingURL=user.module.css.map */
