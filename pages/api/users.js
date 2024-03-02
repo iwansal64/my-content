@@ -9,20 +9,22 @@ export default async function handler(req, res) {
 
     if (req.method == "GET") {
         let { body_params } = req.query;
-
-        if (typeof body_params == "undefined" || typeof body_params["params"] == "undefined") {
-            body_params = JSON.stringify({
-                "params": {}
-            });
-        }
-
-        let { params, match_all = true } = JSON.parse(body_params);
+        body_params = JSON.parse(body_params);
+        let { params = {}, match_all = true, stringify = false } = { stringify: true };
 
         if (!params) {
             res.status(400).json({ success: false, message: "Parameters Required!" });
             return;
         }
-        const { status_code, result } = await get_users({ params, match_all });
+
+        let result = await get_users({ params, match_all, stringify });
+        let { status_code } = result;
+
+        if (stringify) {
+            ({ status_code } = JSON.parse(result));
+        }
+
+
         res.status(status_code).json(result);
     }
     else if (req.method == "POST") {

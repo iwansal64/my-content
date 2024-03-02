@@ -7,8 +7,6 @@ export async function get_users({ params = {}, match_all = false, stringify = fa
     const user_database = await get_user_collection();
     const return_value = await get_data({ database: user_database, params, match_all, stringify });
 
-    console.log(return_value);
-    console.log(typeof return_value);
     return return_value;
 }
 
