@@ -78,7 +78,7 @@ export async function get_data({ database, params = {}, match_all = false, strin
     };
 
     if (stringify) {
-        return_value = JSON.stringify(result);
+        return_value = JSON.stringify(return_value);
     }
 
     return return_value;
