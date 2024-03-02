@@ -37,11 +37,15 @@ export default function SearchFriends({ early_data, user_id = "" }) {
             })
                 .then((json_result) => json_result.json()
                     .then((value) => {
-                        if (value["total"] == 0) {
+                        const result = JSON.parse(value);
+                        console.log('=-=-=-==-=-');
+                        console.log(result);
+                        console.log('=-=-=-==-=-');
+                        if (result["result"]["total"] == 0) {
                             set_users([]);
                         }
                         else {
-                            set_users(value["data"]);
+                            set_users(result["result"]["data"]);
                         }
                     }));
 

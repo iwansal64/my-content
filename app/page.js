@@ -42,8 +42,6 @@ async function PostContainer() {
 
 export default async function Home() {
   const [username, password] = await must_login();
-  console.log(username);
-  console.log(password);
 
 
   return (

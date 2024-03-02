@@ -10,7 +10,8 @@ export default async function handler(req, res) {
     if (req.method == "GET") {
         let { body_params } = req.query;
         body_params = JSON.parse(body_params);
-        let { params = {}, match_all = true, stringify = false } = { stringify: true };
+
+        let { params = {}, match_all = true, stringify = false } = body_params;
 
         if (!params) {
             res.status(400).json({ success: false, message: "Parameters Required!" });
