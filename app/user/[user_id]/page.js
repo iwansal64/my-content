@@ -90,8 +90,7 @@ export default async function ProfilePage({ params }) {
                 <h1 className={styles.username_email}>{target_data["username"]} | {target_data["email"]}</h1>
                 <div className={styles.post_count}>
                     <h2>-- Post Counts --</h2>
-                    <h2>Photo : {target_data["posts_count"]["photo"]}</h2>
-                    <h2>Video : {target_data["posts_count"]["video"]}</h2>
+                    <h2>{target_data["posts_count"]}</h2>
                 </div>
                 <div className={styles.like_stats}>
                     <h2>-- Likes Count --</h2>
