@@ -1,8 +1,8 @@
 'use client'
 import { useCallback, useState } from "react"
 import styles from "../friends.module.css"
-import Profile from "@/app/global_components/profile";
 import { get_users } from "@/server_functionalities/database_user";
+import UserCard from "./user_card";
 
 export default function SearchFriends({ early_data, user_id = "" }) {
     early_data = JSON.parse(early_data);
@@ -38,9 +38,6 @@ export default function SearchFriends({ early_data, user_id = "" }) {
                 .then((json_result) => json_result.json()
                     .then((value) => {
                         const result = JSON.parse(value);
-                        console.log('=-=-=-==-=-');
-                        console.log(result);
-                        console.log('=-=-=-==-=-');
                         if (result["result"]["total"] == 0) {
                             set_users([]);
                         }
@@ -62,15 +59,7 @@ export default function SearchFriends({ early_data, user_id = "" }) {
                     }
 
                     return (
-                        <div className={styles.user} key={index}>
-                            <div className={styles.profile}>
-                                <Profile />
-                            </div>
-                            <div className={styles.info}>
-                                <h1>{value["username"]}</h1>
-                                <button>Add Friend</button>
-                            </div>
-                        </div>
+                        <UserCard key={index} user_data={value} />
                     );
                 })}
             </div>
