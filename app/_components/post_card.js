@@ -1,8 +1,10 @@
 "use client"
-import styles from "../page.module.css"
 import Link from "next/link"
 
-export default function Post({ data, user }) {
+export default function PostCard({ data, user, styles }) {
+    data = JSON.parse(data);
+    user = JSON.parse(user);
+
     return (
         <>
             <Link href={"post/" + data["_id"]} className={styles.post}>

@@ -5,7 +5,7 @@ import NavBar from "./global_components/navbar";
 import ServerSideBtn from "./global_components/server_side_btn";
 import { get_posts } from "@/server_functionalities/database_post"
 import { get_users } from "@/server_functionalities/database_user";
-import Post from "./_components/post_container";
+import PostCard from "./_components/post_card";
 import { ObjectId } from "mongodb";
 import { show_message } from "./client_functionalities/ui_functions";
 import ServerSideMessage from "./global_components/server_side_message";
@@ -29,11 +29,11 @@ async function PostContainer() {
   return (
     <div className={styles.post_container}>
       {result["data"].map((value, index) => {
-        const data = value[0];
-        const user = value[1];
+        const data = JSON.stringify(value[0]);
+        const user = JSON.stringify(value[1]);
 
         return (
-          <Post key={index} data={data} user={user} />
+          <PostCard key={index} data={data} user={user} styles={styles} />
         );
       })}
     </div>
