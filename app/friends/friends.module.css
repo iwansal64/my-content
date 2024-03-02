@@ -1,0 +1,41 @@
+.search_bar_container {
+  position: relative;
+  top: 0;
+  left: 0;
+  padding: 10px;
+}
+.search_bar_container .search_bar {
+  position: sticky;
+  top: 10px;
+  height: -moz-max-content;
+  height: max-content;
+  padding: 10px;
+  font-size: larger;
+}
+@media (min-width: 700px) {
+  .search_bar_container .search_bar {
+    width: 70%;
+  }
+}
+@media (max-width: 700px) {
+  .search_bar_container .search_bar {
+    width: 50%;
+  }
+}
+.search_bar_container .users_list {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 10px;
+}
+.search_bar_container .users_list .user {
+  padding: 10px;
+  box-sizing: border-box;
+  border: 2px solid #222;
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+}
+.search_bar_container .users_list .user .info {
+  justify-self: end;
+}/*# sourceMappingURL=friends.module.css.map */
