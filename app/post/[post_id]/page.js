@@ -1,6 +1,6 @@
 import { get_posts } from "@/server_functionalities/database_post"
 import { ObjectId } from "mongodb";
-import styles from "./post.module.css"
+import styles from "../post.module.css"
 import HomeBtn from "../../global_components/home";
 import { Suspense } from "react";
 import { PostFallback } from "@/app/global_components/fallback_components";
