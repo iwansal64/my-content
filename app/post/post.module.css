@@ -33,4 +33,41 @@
 }
 .post_container .not_liked {
   background-color: red;
+}
+
+.main_wrapper {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+.main_wrapper .header {
+  text-align: center;
+  width: 100%;
+}
+.main_wrapper .input_fields {
+  margin-top: 10px;
+  border: 2px solid #111;
+  padding: 10px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.main_wrapper .input_fields .textarea_field {
+  background-color: transparent;
+  font-size: 1.2rem;
+  resize: none;
+  border: 2px solid #222;
+  transition: 0.1s;
+  width: 90%;
+  padding: 10px;
+}
+.main_wrapper .input_fields .textarea_field:focus {
+  outline: none;
+  border-color: #111;
 }/*# sourceMappingURL=post.module.css.map */
