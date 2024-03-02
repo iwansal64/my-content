@@ -41,3 +41,6 @@ scss/
 
 #log
 data/
+
+#lighthouse
+/*.report.html
