@@ -103,7 +103,9 @@ export default function NavBar({ active_index = 0, username = "" }) {
                         <AddPost />
                     </div>
                     <div className="profile_side">
-                        <Profile />
+                        <Link style={{ borderWidth: "0" }} href={"user"} >
+                            <Profile />
+                        </Link>
                         <h2 className="username">{username}</h2>
                     </div>
                 </div>
