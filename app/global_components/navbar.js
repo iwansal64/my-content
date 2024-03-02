@@ -1,11 +1,12 @@
 "use client"
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation"
+import { useSearchParams } from "next/navigation"
 import anime from "animejs";
 import { useEffect, useMemo } from "react";
 import Logo from "./logo";
 import Profile from "./profile";
+import AddPost from "./add_post";
 
 export default function NavBar({ active_index = 0, username = "" }) {
     const params = useSearchParams();
@@ -83,24 +84,27 @@ export default function NavBar({ active_index = 0, username = "" }) {
 
     return (
         <>
-            <nav className={"nav"}>
-                <div className={"upper_side"}>
-                    <div className={"logo_side"}>
+            <nav className="nav">
+                <div className="upper_side">
+                    <div className="logo_side">
                         <Logo />
                     </div>
-                    <div className={"navigation_side"}>
+                    <div className="navigation_side">
                         {Object.entries(links).map(([text, link], index) =>
                             <Link key={index} className={`${'link'} ${active_index == index ? "active" : ''}`} href={link + "?from=" + active_index}>{text}
-                                <div className={"bg_tracker"}></div>
-                                <div className={"bg_notactive not_visible"}></div>
+                                <div className="bg_tracker"></div>
+                                <div className="bg_notactive not_visible"></div>
                             </Link>
                         )}
                     </div>
                 </div>
-                <div className={"lower_side"}>
-                    <div className={"profile_side"}>
+                <div className="lower_side">
+                    <div className="add_post">
+                        <AddPost />
+                    </div>
+                    <div className="profile_side">
                         <Profile />
-                        <h2 className={"username"}>{username}</h2>
+                        <h2 className="username">{username}</h2>
                     </div>
                 </div>
             </nav>
