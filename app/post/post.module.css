@@ -28,11 +28,18 @@
   overflow-y: auto;
   overflow-x: hidden;
 }
-.post_container .liked {
+.post_container .action_container {
+  display: flex;
+  justify-content: space-between;
+}
+.post_container .action_container > * {
+  padding: 5px 25px;
+}
+.post_container .action_container .liked {
   background-color: green;
 }
-.post_container .not_liked {
-  background-color: red;
+.post_container .action_container .not_liked {
+  background-color: transparent;
 }
 
 .main_wrapper {

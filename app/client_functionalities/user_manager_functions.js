@@ -1,5 +1,5 @@
 "use server"
-import { update_posts, get_posts, insert_posts } from "@/server_functionalities/database_post";
+import { update_posts, get_posts, insert_posts, delete_posts } from "@/server_functionalities/database_post";
 import { update_users } from "@/server_functionalities/database_user";
 import { ObjectId } from "mongodb";
 import { cookies } from "next/headers"
@@ -117,5 +117,27 @@ export async function add_post({ username, user_id, post_data, stringify = false
         }
     });
 
-    return JSON.stringify({ update_user_result, insert_post_result });
+    if (stringify) {
+        return JSON.stringify({ update_user_result, insert_post_result });
+    }
+    else {
+        return { update_user_result, insert_post_result };
+    }
+}
+
+
+export async function delete_post({ post_id, stringify = false }) {
+    const result = await delete_posts({
+        params: {
+            "_id": new ObjectId(post_id)
+        },
+        match_all: false
+    })
+
+    if (stringify) {
+        return JSON.stringify(result);
+    }
+    else {
+        return result;
+    }
 }
