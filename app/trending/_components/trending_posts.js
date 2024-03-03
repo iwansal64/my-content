@@ -17,9 +17,10 @@ async function Post({ data, number }) {
                 <div>
                     <h1>{number}. {data["post_title"]}</h1>
                     <h2>{data["post_description"]}</h2>
+                    <h2>Likes : {data["likes_count"]}</h2>
                 </div>
                 <div>
-                    <h2>Likes : {data["likes_count"]}</h2>
+                    <p>@{data["creator_name"]}</p>
                 </div>
             </Link>
         </>
@@ -29,8 +30,8 @@ async function Post({ data, number }) {
 
 export default async function TrendingPosts() {
 
-    const result = await get_posts({ params: {}, match_all: true });
-    const posts_data = result["result"]["data"];
+    const posts_data_result = await get_posts({ params: {}, match_all: true });
+    const posts_data = posts_data_result["result"]["data"];
     posts_data.sort((a, b) => b["likes_count"] - a["likes_count"]);
 
     return (

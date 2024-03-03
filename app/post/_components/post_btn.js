@@ -3,7 +3,7 @@
 import { show_message } from "@/app/client_functionalities/ui_functions";
 import { add_post } from "@/app/client_functionalities/user_manager_functions";
 
-export default function SubmitPostBtn({ user_id, post_data, reset, must_length: post_data_length = 0 }) {
+export default function SubmitPostBtn({ username, user_id, post_data, reset, must_length: post_data_length = 0 }) {
 
     const handle_add_post = () => {
         console.log(post_data);
@@ -11,7 +11,7 @@ export default function SubmitPostBtn({ user_id, post_data, reset, must_length: 
             return false;
         }
 
-        add_post({ user_id, post_data, stringify: true })
+        add_post({ username, user_id, post_data, stringify: true })
             .then((value) => {
                 const result = JSON.parse(value);
                 console.log(result);

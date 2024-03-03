@@ -4,7 +4,7 @@ import { useState } from "react";
 import styles from "../post.module.css"
 import SubmitPostBtn from "./post_btn"
 
-export default function InputFieldContainer({ user_id, input_fields }) {
+export default function InputFieldContainer({ username, user_id, input_fields }) {
     const [input_field_data, set_input_field_data] = useState({});
     const input_field_data_length = Object.keys(input_fields).length;
     const [input_field_reset_functions, set_input_field_reset_functions] = useState({});
@@ -30,7 +30,7 @@ export default function InputFieldContainer({ user_id, input_fields }) {
                 );
             })}
             <div className={styles.action_buttons}>
-                <SubmitPostBtn user_id={user_id} post_data={input_field_data} reset={reset} must_length={input_field_data_length} />
+                <SubmitPostBtn username={username} user_id={user_id} post_data={input_field_data} reset={reset} must_length={input_field_data_length} />
             </div>
         </>
     )

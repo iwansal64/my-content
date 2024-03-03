@@ -20,20 +20,13 @@ async function PostContainer() {
     show_message({ message });
   }
 
-  for (let index = 0; index < result["total"]; index++) {
-    const data = result["data"][index];
-    const creator = ((await get_users({ params: { "_id": (new ObjectId(data["creator_id"])) }, match_all: false }))["result"]["data"]);
-    result["data"][index] = [data, creator];
-  };
-
   return (
     <div className={styles.post_container}>
       {result["data"].map((value, index) => {
-        const data = JSON.stringify(value[0]);
-        const user = JSON.stringify(value[1]);
+        const data = JSON.stringify(value);
 
         return (
-          <PostCard key={index} data={data} user={user} styles={styles} />
+          <PostCard key={index} data={data} styles={styles} />
         );
       })}
     </div>

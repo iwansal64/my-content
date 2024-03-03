@@ -34,7 +34,7 @@ export default async function Post() {
             <div className={styles.main_wrapper}>
                 <h1 className={styles.header}>Post An Article!</h1>
                 <div className={styles.input_fields}>
-                    <InputFieldContainer user_id={id} input_fields={input_fields} />
+                    <InputFieldContainer username={username} user_id={id} input_fields={input_fields} />
                 </div>
             </div>
             <MessageContainer />

@@ -91,7 +91,7 @@ export async function handle_like_post({ post_id, user_id }) {
     }
 }
 
-export async function add_post({ user_id, post_data, stringify = false }) {
+export async function add_post({ username, user_id, post_data, stringify = false }) {
 
     const update_user_result = await update_users({
         params: {
@@ -107,6 +107,7 @@ export async function add_post({ user_id, post_data, stringify = false }) {
     const insert_post_result = await insert_posts({
         new_data: {
             "creator_id": new ObjectId(user_id),
+            "creator_name": username,
             "post_title": post_data["post_title"],
             "post_description": post_data["post_description"],
             "post_contents": post_data["post_contents"],
