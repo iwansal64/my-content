@@ -10,6 +10,8 @@
   padding: 10px 0;
   position: relative;
   top: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 @media (min-width: 700px) {
   .post_container {
@@ -17,7 +19,8 @@
     grid-template-columns: repeat(auto-fit, minmax(250px, 20%));
     grid-template-rows: repeat(3, 300px);
     grid-auto-flow: row;
-    place-content: center;
+    grid-auto-rows: 300px;
+    justify-content: center;
     gap: 10px;
   }
 }

@@ -3,7 +3,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #333;
+  background-color: #111;
 }
 
 ::-webkit-scrollbar-corner {
@@ -29,7 +29,7 @@ div.global_wrapper {
   grid-template-columns: 0.2fr 1fr;
   grid-auto-flow: row;
 
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 button {
