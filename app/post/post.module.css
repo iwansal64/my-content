@@ -28,6 +28,9 @@
   overflow-y: auto;
   overflow-x: hidden;
 }
+.post_container > .post_contents > p {
+  word-wrap: break-word;
+}
 .post_container .action_container {
   display: flex;
   justify-content: space-between;
@@ -57,6 +60,10 @@
   width: 100%;
 }
 .main_wrapper .input_fields {
+  position: relative;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
   margin-top: 10px;
   border: 2px solid #111;
   padding: 10px;

@@ -1,6 +1,6 @@
-import { delete_posts, get_posts } from "@/server_functionalities/database_post"
+import { get_posts } from "@/server_functionalities/database_post";
 import { ObjectId } from "mongodb";
-import styles from "../post.module.css"
+import styles from "../post.module.css";
 import HomeBtn from "../../global_components/home";
 import { Suspense } from "react";
 import { PostFallback } from "@/app/global_components/fallback_components";
@@ -27,7 +27,7 @@ async function PostData({ post_id }) {
                 </p>
             </div>
         </>
-    )
+    );
 }
 
 async function ActionButtons({ post_id, user_id }) {
@@ -49,12 +49,12 @@ async function ActionButtons({ post_id, user_id }) {
                     if (post_data["creator_id"].toString() == user_id) {
                         return (
                             <DeleteBtn post_id={post_id} />
-                        )
+                        );
                     }
                 })()
             }
         </>
-    )
+    );
 }
 
 export default async function Post({ params }) {
@@ -74,5 +74,5 @@ export default async function Post({ params }) {
             <MessageContainer />
             <HomeBtn />
         </>
-    )
+    );
 }

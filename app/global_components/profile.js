@@ -1,25 +1,24 @@
-import Link from "next/link";
+'use client';
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 export default function Profile({ class_name = "", in_profile = false }) {
 
     const profile_img_path = "/icon-profile.svg";
 
-    if (window.matchMedia("(max-width:500px)").matches) {
-        return (
-            <Image src={profile_img_path} style={{ backgroundColor: "transparent" }} alt="Profile Logo" width={50} height={50} quality={1} />
-        );
-    }
-    else if (window.matchMedia("(max-width:700px)").matches) {
-        return (
-            <Image src={profile_img_path} style={{ backgroundColor: "transparent" }} alt="Profile Logo" width={70} height={70} quality={1} />
-        );
-    }
-    else {
-        return (
-            <Image src={profile_img_path} style={{ backgroundColor: "transparent" }} alt="Profile Logo" width={100} height={100} quality={1} />
-        );
-    }
+    const [size, set_size] = useState(100);
+
+    useEffect(() => {
+        if (window.matchMedia("(max-width:500px)").matches) {
+            set_size(50);
+        }
+        else if (window.matchMedia("(max-width:700px)").matches) {
+            set_size(70);
+        }
+    }, [set_size]);
 
 
+    return (
+        <Image src={profile_img_path} style={{ backgroundColor: "transparent" }} alt="Profile Logo" width={size} height={size} quality={1} />
+    );
 }

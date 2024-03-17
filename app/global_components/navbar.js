@@ -31,75 +31,81 @@ export default function NavBar({ active_index = 0, username = "" }) {
     };
 
     useEffect(() => {
-        const link_container_element = document.getElementsByClassName("navigation_side")[0];
+        setTimeout(() => {
+            const link_container_element = document.getElementsByClassName("navigation_side")[0];
 
-        const link_elements = document.getElementsByClassName("link");
-        const active_link_element = link_elements[active_index];
-        const not_active_link_elements = Array.from(link_elements).filter((value) => value != active_link_element);
+            const link_elements = document.getElementsByClassName("link");
+            const active_link_element = link_elements[active_index];
+            const not_active_link_elements = Array.from(link_elements).filter((value) => value != active_link_element);
 
-        Array.from(link_elements).forEach((element) => {
-            Array.from(element.children)[1].classList.add("not_visible");
-        });
-
-        if (typeof from != "undefined" && !isNaN(from) && from < Object.keys(links).length) {
-            // Adding A Not Active Bg Element For Non Active Link
-            Array.from(link_elements).forEach((link_element) => {
-                link_element.children[2].classList.remove("not_visible");
+            Array.from(link_elements).forEach((element) => {
+                Array.from(element.children)[1].classList.add("not_visible");
             });
 
-            active_link_element.children[2].classList.add("not_visible");
+            if (typeof from != "undefined" && !isNaN(from) && from < Object.keys(links).length) {
+                // Adding A Not Active Bg Element For Non Active Link
+                Array.from(link_elements).forEach((link_element) => {
+                    link_element.children[2].classList.remove("not_visible");
+                });
 
-            // Adding An Active Bg Element For Ex Active Link
-            const ex_active_link_element = link_elements[from];
+                active_link_element.children[2].classList.add("not_visible");
 
-            const offset_top = ex_active_link_element.children[0].parentElement.offsetTop;
-            const offset_left = ex_active_link_element.children[0].parentElement.offsetLeft;
-            const bg_active_element = document.createElement("div");
+                // Adding An Active Bg Element For Ex Active Link
+                const ex_active_link_element = link_elements[from];
 
-            bg_active_element.className = "bg_active";
-            bg_active_element.style.top = offset_top + "px";
-            bg_active_element.style.left = offset_left + "px";
-            bg_active_element.id = "bg_active_element_moving";
+                const offset_top = ex_active_link_element.children[0].parentElement.offsetTop;
+                const offset_left = ex_active_link_element.children[0].parentElement.offsetLeft;
+                const bg_active_element = document.createElement("div");
 
-            link_container_element.appendChild(bg_active_element);
+                bg_active_element.className = "bg_active";
+                bg_active_element.style.top = offset_top + "px";
+                bg_active_element.style.left = offset_left + "px";
+                bg_active_element.id = "bg_active_element_moving";
 
-            const target_top = active_link_element.children[1].parentElement.offsetTop;
-            const target_left = active_link_element.children[1].parentElement.offsetLeft;
-            const target_width = active_link_element.children[1].parentElement.offsetWidth;
-            const target_height = active_link_element.children[1].parentElement.offsetHeight;
+                link_container_element.appendChild(bg_active_element);
 
-            console.log(target_width);
-            console.log(target_height);
-            // Animate The Active Bg Element For Current Active Link
-            anime.timeline({
-                targets: "#bg_active_element_moving",
-                duration: 200,
-                easing: 'easeInOutQuad'
-            }).add({
-                width: target_width,
-                height: target_height,
-                duration: 0,
-            }).add({
-                left: target_left + "px",
-                top: target_top + 'px',
-            });
-        }
-        else {
-            const offset_top = active_link_element.children[1].parentElement.offsetTop;
-            const bg_active_element = document.createElement("div");
+                const target_top = active_link_element.children[1].parentElement.offsetTop;
+                const target_left = active_link_element.children[1].parentElement.offsetLeft;
+                const target_width = active_link_element.children[1].parentElement.offsetWidth;
+                const target_height = active_link_element.children[1].parentElement.offsetHeight;
 
-            bg_active_element.className = "bg_active";
-            bg_active_element.style.top = offset_top + "px";
+                console.log(target_width);
+                console.log(target_height);
+                // Animate The Active Bg Element For Current Active Link
+                anime.timeline({
+                    targets: "#bg_active_element_moving",
+                    duration: 200,
+                    easing: 'easeInOutQuad'
+                }).add({
+                    width: target_width,
+                    height: target_height,
+                    duration: 0,
+                }).add({
+                    left: target_left + "px",
+                    top: target_top + 'px',
+                });
+            }
+            else {
+                const offset_top = active_link_element.children[1].parentElement.offsetTop;
+                const offset_left = active_link_element.children[1].parentElement.offsetLeft;
+                const bg_active_element = document.createElement("div");
 
-            link_container_element.appendChild(bg_active_element);
+                bg_active_element.className = "bg_active";
+                bg_active_element.style.top = offset_top + "px";
+                bg_active_element.style.left = offset_left + "px";
+                bg_active_element.style.width = active_link_element.children[1].parentElement.offsetWidth + "px";
+                bg_active_element.style.height = active_link_element.children[1].parentElement.offsetHeight + "px";
+
+                link_container_element.appendChild(bg_active_element);
+
+                not_active_link_elements.forEach((not_active_link_element) => {
+                    not_active_link_element.children[2].classList.remove("not_visible");
+                });
 
 
-            not_active_link_elements.forEach((not_active_link_element) => {
-                not_active_link_element.children[2].classList.remove("not_visible");
-            });
-
-            active_link_element.children[2].classList.add("not_visible");
-        }
+                active_link_element.children[2].classList.add("not_visible");
+            }
+        }, 10);
     }, [active_index, from, links]);
 
     const [window_500pixels, set_window_500pixels] = useState(true);
