@@ -7,7 +7,9 @@ export default function AddPost() {
         router.push("post/");
     };
 
+    const window_500pixels = window.matchMedia("(max-width: 500px)").matches;
+
     return (
-        <button onClick={handle_add_post} className="add_post_btn">+ Add Post</button>
-    )
+        <button onClick={handle_add_post} className="add_post_btn">+{window_500pixels ? "" : " Add Post"}</button>
+    );
 }
